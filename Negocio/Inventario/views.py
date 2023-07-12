@@ -69,11 +69,11 @@ def elimina(request,id):
 
 from django.contrib.auth.decorators import login_required
 
-@login_required
+#@login_required
 def registrar(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        if request.is_valid():
+        if form.is_valid():
             usuario = form.cleaned_data['username']
             form.save()
             messages.success(request, f'Usuario {usuario} creado')
@@ -81,4 +81,4 @@ def registrar(request):
     else:
         form = UserRegisterForm()
     contex = { 'form':form}
-    return render(request, 'inventario/register.html', contex)
+    return render(request, 'Inventario/register.html', contex)

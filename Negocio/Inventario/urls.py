@@ -8,6 +8,9 @@ urlpatterns = [
     path('add/', views.add, name='add'),
     path('edit/<int:id>/', views.edita, name='edit'),
     path('eliminar/<int:id>/', views.elimina, name='eliminar'),
-    path('login/',LoginView.as_view(template_name='inventario/login.html'),name='login'),
-    path('logout/',LogoutView.as_view(template_name='inventario/logout.html',name='logout')),
+    path('register/', views.registrar, name='register'),
+    path('login/', LoginView.as_view(template_name='Inventario/login.html'), name='login'),
+    path('logout/',LogoutView.as_view(template_name='Inventario/logout.html'),name='logout'),
+    
+
 ]
