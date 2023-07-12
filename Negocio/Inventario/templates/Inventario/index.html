@@ -1,0 +1,101 @@
+{% extends "inventario/base.html" %}
+{% block body %}
+  {% if producto %}
+    <div class="card border-secondary ms-4 me-4 mb-4">
+        <div class="card-header">Lista de Productos</div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Acción</th>
+                </tr>
+                </thead>
+                <tbody>
+                  {% for productos in producto %}
+                    {% if productos.estado == 'A' %}
+                      <tr>
+                          <td>{{productos.id}}</td>
+                          <td>{{productos.codigo}}</td>
+                          <td>{{productos.nombre}}</td>
+                          <td>{{productos.precio|floatformat:2}}</td>
+
+                          <td>
+                            <button type="button" class="btn btn-success me-1" href="{% url 'view_producto' productos.id %}" data-bs-toggle="modal"
+                                    data-bs-target="#myModal{{productos.id}}" style="border-radius: 5px;">
+                              <i class="fa-solid fa-circle-info fa-lg"></i>
+                            </button> 
+                            <!--MODAL-->
+                            <div class="modal" id="myModal{{productos.id}}" tabindex="-1" aria-labelledby="myModalLabel1" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">Producto: <strong>{{productos.nombre}}</strong></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true"></span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <ul class="list-unstyled">
+                                      <li>Producto: <strong>{{productos.nombre}}</strong></li>
+                                      <li>Precio: <strong>${{productos.precio}}</strong></li>
+                                      <li>Codigo: <strong>{{productos.codigo}}</strong></li>
+                                    </ul>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="border-radius: 5px;">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <a style="border-radius: 5px;" class="btn btn-warning me-1"  href="{% url 'edit' productos.id %}">
+                              <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                            </a>
+
+                            <a style="border-radius: 5px;" class="btn btn-danger me-1"
+                                data-bs-toggle="modal" data-bs-target="#elimina{{productos.id}}">
+                              <i class="fa-solid fa-trash-can fa-lg"></i>
+                            </a>
+                            <!--MODAL ELIMINAR-->
+                            <div class="modal" id="elimina{{productos.id}}" tabindex="-1" aria-labelledby="myModalLabel2" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">Eliminar producto: <strong>{{productos.nombre}}</strong></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true"></span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p>Está por eliminar este producto.</p>
+                                  </div>
+                                  
+                                  <div class="modal-footer">
+                                    <form action="{% url 'eliminar' productos.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="submit" class="btn btn-primary" value="Elimina">
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 5px;">Cancelar</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                      </tr>
+                    {% endif %}
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+  {% else %}
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>¡Advertencia!</strong>No hay registros en la base de datos
+    </div>
+  {% endif %}
+{% endblock %}

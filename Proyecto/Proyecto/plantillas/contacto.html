@@ -1,0 +1,11 @@
+{%extends "base.html" %}
+{% block title%} Cooperativa Oro verde {% endblock%}
+{% block content %}
+{%if lista%}
+{%for estudiantes in lista%}
+<li> <a href="#">{{estudiantes}}</a></li>
+{%endfor%}
+{%else%}
+No hay nada mi rey
+{%endif%}
+{% endblock %}
