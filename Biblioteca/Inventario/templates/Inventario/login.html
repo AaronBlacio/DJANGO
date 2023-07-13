@@ -1,0 +1,20 @@
+{% extends "inventario/base.html" %}
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-6">
+        <div class="card border-primary mb-3">
+            <div class="card-header">
+                <i class="fa-solid fa-right-to-bracket fa-lg"></i> Login
+            </div>
+            <div class="card-body">
+                <form class="login-form" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary" id="submit">Login</button>
+                    <a href="{% url 'register' %}">Registrarse</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
