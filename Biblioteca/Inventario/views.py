@@ -1,13 +1,10 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Libro
-from .forms import LibroForm
-
-
-
-
-
+from .forms import LibroForm, UserRegisterForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 # Create your views here.
 def index (request):
@@ -73,3 +70,16 @@ def elimina(request,id):
         producto.estado='I'
         producto.save()
     return HttpResponseRedirect(reverse('index'))
+
+def registrar(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            usuario = form.cleaned_data['username']
+            form.save()
+            messages.success(request, f'Usuario {usuario} creado')
+            return redirect(index)
+    else:
+        form = UserRegisterForm()
+    contex = { 'form':form}
+    return render(request, 'Inventario/register.html', contex)
