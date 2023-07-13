@@ -28,9 +28,9 @@
             </ul>
             <form class="d-flex">
               {% if request.user.is_authenticated %}
-              <a class="btn btn-primary my-2 my-sm-0" href="{% url 'logout' %}"><i class="fa-solid fa-right-to-bracket fa-lg"></i> Logout</a>
+              <a style="border-radius: 5px;" class="btn btn-primary my-2 my-sm-0" href="{% url 'logout' %}"><i class="fa-solid fa-right-to-bracket fa-lg"></i> Logout</a>
               {% else %}
-              <a class="btn btn-primary my-2 my-sm-0" href="{% url 'login' %}"><i class="fa-solid fa-user-plus fa-lg"></i> Login</a>
+              <a style="border-radius: 5px;" class="btn btn-primary my-2 my-sm-0" href="{% url 'login' %}"><i class="fa-solid fa-user-plus fa-lg"></i> Login</a>
               {% endif %}
             </form>
           </div>

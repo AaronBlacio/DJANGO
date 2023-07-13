@@ -77,7 +77,7 @@
                                   <div class="modal-footer">
                                     <form action="{% url 'eliminar' libros.id %}" method="POST">
                                         {% csrf_token %}
-                                        <input type="submit" class="btn btn-primary" value="Eliminar">
+                                        <input type="submit" class="btn btn-primary" value="Eliminar" style="border-radius: 5px;">
                                     </form>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 5px;">Cancelar</button>
                                   </div>
