@@ -7,42 +7,41 @@
             <table class="table table-hover">
                 <thead>
                   <tr>
+                    <th scope="col">Id</th>
                     <th scope="col">Nombre del libro</th>
-                    <th scope="col">Autor del libro</th>
                     <th scope="col">Categoría</th>
                     <th scope="col">Precio</th>
-                    <th scope="col">Código</th>
                     <th scope="col">Acción</th>
                 </tr>
                 </thead>
                 <tbody>
                   {% for libros in libro %}
                       <tr>            
+                          <td>{{libros.id}}</td>
                           <td>{{libros.nombre_libro}}</td>
-                          <td>{{libros.nombre_autor}}</td>
                           <td>{{libros.categoria}}</td>
                           <td>{{libros.precio|floatformat:2}}</td>
-                          <td>{{libros.codigo}}</td>
                           <td>
-                            <button style="border-radius: 5px;" type="button" class="btn btn-success me-1" href="" data-bs-toggle="modal"
-                                    data-bs-target="" >
+                            <button style="border-radius: 5px;" type="button" class="btn btn-success me-1" href="{% url 'view_producto' libros.id %}" data-bs-toggle="modal"
+                                    data-bs-target="#myModal{{libros.id}}" >
                               <i class="fa-solid fa-circle-info fa-lg"></i>
                             </button> 
-                            <!--MODAL
-                            <div class="modal" id="myModal{{productos.id}}" tabindex="-1" aria-labelledby="myModalLabel1" aria-hidden="true">
+                            <!--MODAL-->
+                            <div class="modal" id="myModal{{libros.id}}" tabindex="-1" aria-labelledby="myModalLabel1" aria-hidden="true">
                               <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h5 class="modal-title">Producto: <strong>{{productos.nombre}}</strong></h5>
+                                    <h5 class="modal-title">Libro: <strong>{{libros.nombre_libro}}</strong></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true"></span>
                                     </button>
                                   </div>
                                   <div class="modal-body">
                                     <ul class="list-unstyled">
-                                      <li>Producto: <strong>{{productos.nombre}}</strong></li>
-                                      <li>Precio: <strong>${{productos.precio}}</strong></li>
-                                      <li>Codigo: <strong>{{productos.codigo}}</strong></li>
+                                      <li>Autor del libro: <strong>{{libros.nombre_autor}}</strong></li>
+                                      <li>Categoría: <strong>{{libros.categoria}}</strong></li>
+                                      <li>Precio: <strong>${{libros.precio}}</strong></li>
+                                      <li>Codigo: <strong>{{libros.codigo}}</strong></li>
                                     </ul>
                                   </div>
                                   <div class="modal-footer">
@@ -50,7 +49,7 @@
                                   </div>
                                 </div>
                               </div>
-                            </div>-->
+                            </div>
 
                             <a style="border-radius: 5px;" class="btn btn-warning me-1"  href="">
                               <i class="fa-solid fa-pen-to-square fa-lg"></i>
