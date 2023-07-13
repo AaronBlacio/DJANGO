@@ -1,17 +1,17 @@
 {% extends "inventario/base.html" %}
 {% block body %}
-    <H3 class="text-center m-4">Editar Producto</H3>
+    <H3 class="text-center m-4">Editar un Libro</H3>
     {% if success %}
         <div class="alert alert-dismissible alert-success" role="alert">
-            Se editó el producto exitosamente
-            <a href="{% url 'index' %}" class="alert-link">Ir a inicio</a>
+            El libro se editó exitosamente.
+            <a href="{% url 'index' %}" class="alert-link"> Ir a inicio</a>
         </div>
     {% else %}
         <div class="row justify-content-center">
             <div class="col-6">
                 <div class="card border-primary mb-3">
                     <div class="card-header">
-                        <i class="fa-solid fa-plus fa-lg"></i> Editar Producto
+                        <i class="fa-solid fa-plus fa-lg"></i> Editar Libro
                     </div>
                     <div class="card-body">
                         <form action="" method="post">

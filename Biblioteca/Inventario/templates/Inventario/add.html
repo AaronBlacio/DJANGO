@@ -1,17 +1,17 @@
 {% extends "inventario/base.html" %}
 {% block body %}
-    <H3 class="text-center m-4">Agregar Producto</H3>
+    <H3 class="text-center m-4">Agregar un libro</H3>
     {% if success %}
         <div class="alert alert-dismissible alert-success" role="alert">
-            Se agregó el producto exitosamente
-            <a href="{% url 'index' %}" class="alert-link">Ir a inicio</a>
+            El libro se agregó exitosamente.
+            <a href="{% url 'index' %}" class="alert-link"> Ir a inicio</a>
         </div>
     {% else %}
         <div class="row justify-content-center">
             <div class="col-6">
                 <div class="card border-primary mb-3">
                     <div class="card-header">
-                        <i class="fa-solid fa-plus fa-lg"></i> Agregar Producto
+                        <i class="fa-solid fa-plus fa-lg"></i> Agregar libro
                     </div>
                     <div class="card-body">
                         <form action="{% url 'add' %}" method="post">

@@ -16,6 +16,7 @@
                 </thead>
                 <tbody>
                   {% for libros in libro %}
+                    {% if libros.estado == 'A' %}
                       <tr>            
                           <td>{{libros.id}}</td>
                           <td>{{libros.nombre_libro}}</td>
@@ -51,40 +52,41 @@
                               </div>
                             </div>
 
-                            <a style="border-radius: 5px;" class="btn btn-warning me-1"  href="">
+                            <a style="border-radius: 5px;" class="btn btn-warning me-1"  href="{% url 'edit' libros.id %}">
                               <i class="fa-solid fa-pen-to-square fa-lg"></i>
                             </a>
 
                             <a style="border-radius: 5px;" class="btn btn-danger me-1"
-                                data-bs-toggle="modal" data-bs-target="">
+                                data-bs-toggle="modal" data-bs-target="#elimina{{libros.id}}">
                               <i class="fa-solid fa-trash-can fa-lg"></i>
                             </a>
-                            <!--MODAL ELIMINAR
-                            <div class="modal" id="elimina{{productos.id}}" tabindex="-1" aria-labelledby="myModalLabel2" aria-hidden="true">
+                            <!--MODAL ELIMINAR-->
+                            <div class="modal" id="elimina{{libros.id}}" tabindex="-1" aria-labelledby="myModalLabel2" aria-hidden="true">
                               <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h5 class="modal-title">Eliminar producto: <strong>{{productos.nombre}}</strong></h5>
+                                    <h5 class="modal-title">Eliminar libro: <strong>{{libros.nombre_libro}}</strong></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true"></span>
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                    <p>Está por eliminar este producto.</p>
+                                    <p>Está por eliminar este libro.</p>
                                   </div>
                                   
                                   <div class="modal-footer">
-                                    <form action="" method="POST">
+                                    <form action="{% url 'eliminar' libros.id %}" method="POST">
                                         {% csrf_token %}
-                                        <input type="submit" class="btn btn-primary" value="Elimina">
+                                        <input type="submit" class="btn btn-primary" value="Eliminar">
                                     </form>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 5px;">Cancelar</button>
                                   </div>
                                 </div>
                               </div>
-                            </div>-->
+                            </div>
                           </td>
                       </tr>
+                    {% endif %}
                   {% endfor %}
                 </tbody>
             </table>
