@@ -1,14 +1,50 @@
 {% extends "publicaciones/base.html" %}
 {% block body %}
-{% if libro %}
+{% if publicacion %}
 <br>
-<div class="card border-primary mb-3" style="max-width: 20rem;">
-    <div class="card-header">Header</div>
+{% for publicaciones in publicacion %}
+  {% if publicaciones.estado == 'A' %}
+<div class="card border-primary mb-3">
+    <div class="card-header">{{publicaciones.nombre_autor}}</div>
     <div class="card-body">
-      <h4 class="card-title">Primary card title</h4>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <h4 class="card-title">{{publicaciones.titulo}}</h4>
+      <p class="card-text">{{publicaciones.contenido}}</p>
+    </div>
+    <div class="card-footer text-muted">
+      {{publicaciones.fecha}}
+    </div>
+    <div class="card-body">
+      <a href="{% url 'edit' publicaciones.id %}" class="btn btn-info">Editar <i class="fa-solid fa-pen-to-square fa-lg"></i></a>
+      <a data-bs-toggle="modal" data-bs-target="#elimina{{publicaciones.id}}" class="btn btn-danger">Eliminar <i class="fa-solid fa-trash-can fa-lg"></i></a>
+
+      <!--MODAL ELIMINAR-->
+      <div class="modal" id="elimina{{publicaciones.id}}" tabindex="-1" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Eliminar publicación: <strong>{{publicaciones.titulo}}</strong></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Está por eliminar esta publicación</p>
+            </div>
+            
+            <div class="modal-footer">
+              <form action="{% url 'eliminar' publicaciones.id %}" method="POST">
+                  {% csrf_token %}
+                  <input type="submit" class="btn btn-primary" value="Eliminar">
+              </form>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  {% endif %}
+{% endfor %}
 {% else %}
 <br>
   <div class="alert alert-dismissible alert-danger">
